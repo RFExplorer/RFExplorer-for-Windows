@@ -43,7 +43,7 @@ namespace RFExplorerSimpleClient
         {
             InitializeComponent();
 
-            m_objRFE = new RFECommunicator();
+            m_objRFE = new RFECommunicator(true);
             m_objRFE.PortClosedEvent += new EventHandler(OnRFE_PortClosed);
             m_objRFE.ReportInfoAddedEvent += new EventHandler(OnRFE_ReportLog);
             m_objRFE.ReceivedConfigurationDataEvent += new EventHandler(OnRFE_ReceivedConfigData);
@@ -149,7 +149,7 @@ namespace RFExplorerSimpleClient
                 m_objRFE.ConnectPort(comboBoxPortsRFExplorer.SelectedValue.ToString(), Convert.ToInt32(comboBoxBaudrateRFExplorer.SelectedItem.ToString()));
                 if (m_objRFE.PortConnected)
                 {
-                    m_objRFE.AskConfigData();
+                    m_objRFE.SendCommand_RequestConfigData();
                 }
                 Thread.Sleep(2000);
                 m_objRFE.ProcessReceivedString(true, out m_sRFEReceivedString);

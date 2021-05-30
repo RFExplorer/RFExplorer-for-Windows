@@ -1,6 +1,6 @@
 //============================================================================
 //RF Explorer for Windows - A Handheld Spectrum Analyzer for everyone!
-//Copyright © 2010-16 Ariel Rocholl, www.rf-explorer.com
+//Copyright © 2010-21 RF Explorer Technologies SL, www.rf-explorer.com
 //
 //This application is free software; you can redistribute it and/or
 //modify it under the terms of the GNU Lesser General Public
@@ -16,8 +16,6 @@
 //License along with this library; if not, write to the Free Software
 //Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //=============================================================================
-
-#define INCLUDE_SNIFFER
 
 using System;
 using System.Collections.Generic;
@@ -170,7 +168,18 @@ namespace RFExplorerCommunicator
             MODEL_WSUB3G,   //5
             MODEL_6G,       //6
 
+            MODEL_WSUB1G_PLUS = 10,  //10
+            MODEL_AUDIOPRO = 11,   //note this is converted internally to MODEL_WSUB3G
+            MODEL_2400_PLUS = 12,
+            MODEL_4G_PLUS = 13,
+            MODEL_6G_PLUS = 14,
+
+            MODEL_W5G3G = 16,
+            MODEL_W5G4G = 17,
+            MODEL_W5G5G = 18,
+
             MODEL_RFGEN = 60, //60
+            MODEL_RFGEN_EXPANSION = 61,  //61
             MODEL_NONE = 0xFF //0xFF
         };
 
@@ -278,21 +287,6 @@ namespace RFExplorerCommunicator
 
             return eReturn;
         }
-
-#if INCLUDE_SNIFFER
-        enum eModulation
-        {
-            MODULATION_OOK,         //0
-            MODULATION_PSK,         //1
-            MODULATION_NONE = 0xFF  //0xFF
-        };
-        eModulation m_eModulation;          //Modulation being used
-
-        UInt16 m_nRAWSnifferIndex = 0;        //Index pointing to current RAW data value shown
-        UInt16 m_nMaxRAWSnifferIndex = 0;     //Index pointing to the last RAW data value available
-        string[] m_arrRAWSnifferData;       //Array of strings for sniffer data
-        UInt16 m_nTotalBufferSize = 1024;
-#endif
 
         //offset values read from spectrum analyzer calibration
         bool m_bMainboardInternalCalibrationAvailable = false;
@@ -1165,15 +1159,6 @@ namespace RFExplorerCommunicator
                 m_arrRAM2[nInd] = new RFEMemoryBlock();
                 m_arrRAM2[nInd].Address = (UInt32)(nInd * RFEMemoryBlock.MAX_BLOCK_SIZE);
             }
-
-#if INCLUDE_SNIFFER
-            m_arrRAWSnifferData = new string[m_nTotalBufferSize];
-            m_nRAWSnifferIndex = 0;
-            m_nMaxRAWSnifferIndex = 0;
-            /*numSampleDecoder.Maximum = m_nTotalBufferSize;
-            numSampleDecoder.Minimum = 0;
-            numSampleDecoder.Value  = 0;*/
-#endif
 
             try
             {
@@ -2140,33 +2125,6 @@ namespace RFExplorerCommunicator
                             {
                                 bWrongFormat = true;
                             }
-#if INCLUDE_SNIFFER
-                            else if ((sLine.Length > 2) && sLine.Substring(0, 2) == "$R")
-                            {
-                                if (!HoldMode && m_nRAWSnifferIndex < m_nTotalBufferSize)
-                                {
-                                    if (m_arrRAWSnifferData == null)
-                                    {
-                                        //don't allocate memory for this object before actually required as most users may not need this
-                                        m_arrRAWSnifferData = new string[m_nTotalBufferSize];
-                                    }
-                                    m_nRAWSnifferIndex++;
-                                    if (m_nRAWSnifferIndex >= m_nTotalBufferSize)
-                                    {
-                                        m_nRAWSnifferIndex = m_nTotalBufferSize;
-                                        HoldMode = true;
-                                        //UpdateFeedMode();
-                                        ReportLog("Buffer is full.");
-                                    }
-                                    else
-                                    {
-                                        m_arrRAWSnifferData[m_nRAWSnifferIndex] = sLine;
-                                    }
-                                    m_nMaxRAWSnifferIndex = m_nRAWSnifferIndex;
-                                    //DrawRAWDecoder();
-                                }
-                            }
-#endif
                             else if ((sLine.Length > 5) && (sLine.Substring(0, 6) == "#C2-F:"))
                             {
                                 bWrongFormat = true; //parsed on the thread
@@ -2982,7 +2940,7 @@ namespace RFExplorerCommunicator
         #endregion
 
         #region COM port low level details
-        internal bool GetConnectedPorts()
+        public bool GetConnectedPorts()
         {
             try
             {

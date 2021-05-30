@@ -68,11 +68,9 @@ namespace RFExplorerSimpleClient
             this.groupBox2.Controls.Add(this.labelAmplitude);
             this.groupBox2.Controls.Add(this.labelFrequency);
             this.groupBox2.Controls.Add(this.labelSweeps);
-            this.groupBox2.Location = new System.Drawing.Point(556, 25);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox2.Location = new System.Drawing.Point(278, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.groupBox2.Size = new System.Drawing.Size(400, 208);
+            this.groupBox2.Size = new System.Drawing.Size(200, 104);
             this.groupBox2.TabIndex = 60;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "RF Explorer live Data";
@@ -81,10 +79,9 @@ namespace RFExplorerSimpleClient
             // 
             this.labelAmplitude.AutoSize = true;
             this.labelAmplitude.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold);
-            this.labelAmplitude.Location = new System.Drawing.Point(12, 100);
-            this.labelAmplitude.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.labelAmplitude.Location = new System.Drawing.Point(6, 50);
             this.labelAmplitude.Name = "labelAmplitude";
-            this.labelAmplitude.Size = new System.Drawing.Size(109, 48);
+            this.labelAmplitude.Size = new System.Drawing.Size(59, 25);
             this.labelAmplitude.TabIndex = 58;
             this.labelAmplitude.Text = "dBM";
             // 
@@ -92,20 +89,18 @@ namespace RFExplorerSimpleClient
             // 
             this.labelFrequency.AutoSize = true;
             this.labelFrequency.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelFrequency.Location = new System.Drawing.Point(12, 38);
-            this.labelFrequency.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.labelFrequency.Location = new System.Drawing.Point(6, 19);
             this.labelFrequency.Name = "labelFrequency";
-            this.labelFrequency.Size = new System.Drawing.Size(114, 48);
+            this.labelFrequency.Size = new System.Drawing.Size(61, 25);
             this.labelFrequency.TabIndex = 58;
             this.labelFrequency.Text = "MHZ";
             // 
             // labelSweeps
             // 
             this.labelSweeps.AutoSize = true;
-            this.labelSweeps.Location = new System.Drawing.Point(12, 156);
-            this.labelSweeps.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.labelSweeps.Location = new System.Drawing.Point(6, 78);
             this.labelSweeps.Name = "labelSweeps";
-            this.labelSweeps.Size = new System.Drawing.Size(112, 25);
+            this.labelSweeps.Size = new System.Drawing.Size(57, 13);
             this.labelSweeps.TabIndex = 57;
             this.labelSweeps.Text = "Sweeps: 0";
             // 
@@ -117,11 +112,9 @@ namespace RFExplorerSimpleClient
             this.groupBox1.Controls.Add(this.btnDisconnectRFExplorer);
             this.groupBox1.Controls.Add(this.comboBoxPortsRFExplorer);
             this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.groupBox1.Location = new System.Drawing.Point(24, 23);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.groupBox1.Size = new System.Drawing.Size(520, 208);
+            this.groupBox1.Size = new System.Drawing.Size(260, 104);
             this.groupBox1.TabIndex = 59;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "RF Explorer COM Port";
@@ -129,10 +122,9 @@ namespace RFExplorerSimpleClient
             // btnRescanPortsRFExplorer
             // 
             this.btnRescanPortsRFExplorer.AutoSize = true;
-            this.btnRescanPortsRFExplorer.Location = new System.Drawing.Point(220, 37);
-            this.btnRescanPortsRFExplorer.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnRescanPortsRFExplorer.Location = new System.Drawing.Point(110, 18);
             this.btnRescanPortsRFExplorer.Name = "btnRescanPortsRFExplorer";
-            this.btnRescanPortsRFExplorer.Size = new System.Drawing.Size(68, 67);
+            this.btnRescanPortsRFExplorer.Size = new System.Drawing.Size(34, 23);
             this.btnRescanPortsRFExplorer.TabIndex = 11;
             this.btnRescanPortsRFExplorer.Text = "*";
             this.btnRescanPortsRFExplorer.UseVisualStyleBackColor = true;
@@ -144,20 +136,18 @@ namespace RFExplorerSimpleClient
             this.comboBoxBaudrateRFExplorer.Items.AddRange(new object[] {
             "500000",
             "2400"});
-            this.comboBoxBaudrateRFExplorer.Location = new System.Drawing.Point(300, 38);
-            this.comboBoxBaudrateRFExplorer.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.comboBoxBaudrateRFExplorer.Location = new System.Drawing.Point(150, 19);
             this.comboBoxBaudrateRFExplorer.Name = "comboBoxBaudrateRFExplorer";
-            this.comboBoxBaudrateRFExplorer.Size = new System.Drawing.Size(180, 33);
+            this.comboBoxBaudrateRFExplorer.Size = new System.Drawing.Size(92, 21);
             this.comboBoxBaudrateRFExplorer.TabIndex = 12;
             // 
             // btnConnectRFExplorer
             // 
             this.btnConnectRFExplorer.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnConnectRFExplorer.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConnectRFExplorer.Location = new System.Drawing.Point(44, 96);
-            this.btnConnectRFExplorer.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnConnectRFExplorer.Location = new System.Drawing.Point(22, 48);
             this.btnConnectRFExplorer.Name = "btnConnectRFExplorer";
-            this.btnConnectRFExplorer.Size = new System.Drawing.Size(214, 73);
+            this.btnConnectRFExplorer.Size = new System.Drawing.Size(107, 36);
             this.btnConnectRFExplorer.TabIndex = 13;
             this.btnConnectRFExplorer.Text = "Connect";
             this.btnConnectRFExplorer.Click += new System.EventHandler(this.btnConnectRFExplorer_Click);
@@ -166,10 +156,9 @@ namespace RFExplorerSimpleClient
             // 
             this.btnDisconnectRFExplorer.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnDisconnectRFExplorer.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDisconnectRFExplorer.Location = new System.Drawing.Point(270, 96);
-            this.btnDisconnectRFExplorer.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnDisconnectRFExplorer.Location = new System.Drawing.Point(135, 48);
             this.btnDisconnectRFExplorer.Name = "btnDisconnectRFExplorer";
-            this.btnDisconnectRFExplorer.Size = new System.Drawing.Size(214, 73);
+            this.btnDisconnectRFExplorer.Size = new System.Drawing.Size(107, 36);
             this.btnDisconnectRFExplorer.TabIndex = 41;
             this.btnDisconnectRFExplorer.Text = "Disconnect";
             this.btnDisconnectRFExplorer.Click += new System.EventHandler(this.btnDisconnectRFExplorer_Click);
@@ -177,19 +166,17 @@ namespace RFExplorerSimpleClient
             // comboBoxPortsRFExplorer
             // 
             this.comboBoxPortsRFExplorer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxPortsRFExplorer.Location = new System.Drawing.Point(44, 38);
-            this.comboBoxPortsRFExplorer.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.comboBoxPortsRFExplorer.Location = new System.Drawing.Point(22, 19);
             this.comboBoxPortsRFExplorer.Name = "comboBoxPortsRFExplorer";
-            this.comboBoxPortsRFExplorer.Size = new System.Drawing.Size(160, 33);
+            this.comboBoxPortsRFExplorer.Size = new System.Drawing.Size(82, 21);
             this.comboBoxPortsRFExplorer.TabIndex = 10;
             // 
             // m_chkDebug
             // 
             this.m_chkDebug.AutoSize = true;
-            this.m_chkDebug.Location = new System.Drawing.Point(24, 242);
-            this.m_chkDebug.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.m_chkDebug.Location = new System.Drawing.Point(12, 121);
             this.m_chkDebug.Name = "m_chkDebug";
-            this.m_chkDebug.Size = new System.Drawing.Size(207, 29);
+            this.m_chkDebug.Size = new System.Drawing.Size(108, 17);
             this.m_chkDebug.TabIndex = 61;
             this.m_chkDebug.Text = "Show Debug info";
             this.m_chkDebug.UseVisualStyleBackColor = true;
@@ -198,26 +185,24 @@ namespace RFExplorerSimpleClient
             // m_edRFEReportLog
             // 
             this.m_edRFEReportLog.BackColor = System.Drawing.Color.White;
-            this.m_edRFEReportLog.Location = new System.Drawing.Point(24, 287);
-            this.m_edRFEReportLog.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.m_edRFEReportLog.Location = new System.Drawing.Point(12, 144);
             this.m_edRFEReportLog.Multiline = true;
             this.m_edRFEReportLog.Name = "m_edRFEReportLog";
             this.m_edRFEReportLog.ReadOnly = true;
-            this.m_edRFEReportLog.Size = new System.Drawing.Size(928, 383);
+            this.m_edRFEReportLog.Size = new System.Drawing.Size(466, 194);
             this.m_edRFEReportLog.TabIndex = 62;
             this.m_edRFEReportLog.Visible = false;
             // 
             // SimpleMainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(192F, 192F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(984, 287);
+            this.ClientSize = new System.Drawing.Size(492, 144);
             this.Controls.Add(this.m_edRFEReportLog);
             this.Controls.Add(this.m_chkDebug);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "SimpleMainForm";
             this.Text = "RF Explorer - simple automation sample";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SimpleMainForm_FormClosing);

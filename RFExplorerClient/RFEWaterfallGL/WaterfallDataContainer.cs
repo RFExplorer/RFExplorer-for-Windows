@@ -66,7 +66,7 @@ namespace RFEWaterfallGL
 
             for (UInt16 nStep = 0; nStep < objSweep.TotalSteps; nStep++)
             {
-                double fAmplitudeDBM = objSweep.GetAmplitudeDBM(nStep, m_objGLForm.Analyzer.m_AmplitudeCalibration, menuUseAmplitudeCorrection);
+                double fAmplitudeDBM = objSweep.GetAmplitudeDBM(nStep);
 
                 //This is for debug only -> it writes all the data points in the "Report" window. It takes a lot to print a large data set so use with care
                 //double fFrequencyMHZ = objSweep.GetFrequencyMHZ(nStep);

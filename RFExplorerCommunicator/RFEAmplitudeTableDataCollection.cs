@@ -1,6 +1,6 @@
 ﻿//============================================================================
 //RF Explorer for Windows - A Handheld Spectrum Analyzer for everyone!
-//Copyright © 2010-21 RF Explorer Technologies SL, www.rf-explorer.com
+//Copyright (C) 2010-20 RF Explorer Technologies SL, www.rf-explorer.com
 //
 //This application is free software; you can redistribute it and/or
 //modify it under the terms of the GNU Lesser General Public
@@ -22,6 +22,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Globalization;
 
 namespace RFExplorerCommunicator
 {
@@ -72,7 +73,7 @@ namespace RFExplorerCommunicator
         public float[] m_arrAmplitudeCalibrationDataDB;
         internal float GetAmplitudeCalibration(int nIndexMHz)
         {
-            if ((nIndexMHz<MAX_ENTRY_DATA) && (m_arrAmplitudeCalibrationDataDB!=null)
+            if ((nIndexMHz < MAX_ENTRY_DATA) && (m_arrAmplitudeCalibrationDataDB != null)
                 && (m_arrAmplitudeCalibrationDataDB.Length > nIndexMHz) && (m_arrAmplitudeCalibrationDataDB[nIndexMHz] != INVALID_DATA))
                 return m_arrAmplitudeCalibrationDataDB[nIndexMHz];
             else
@@ -99,7 +100,7 @@ namespace RFExplorerCommunicator
         public RFEAmplitudeTableData()
         {
             m_arrAmplitudeCalibrationDataDB = new float[MAX_ENTRY_DATA];
-            m_arrCompressionDataDBM= new float[MAX_ENTRY_DATA];
+            m_arrCompressionDataDBM = new float[MAX_ENTRY_DATA];
             m_bHasCompressionData = false;
             Clear();
         }
@@ -114,7 +115,7 @@ namespace RFExplorerCommunicator
             m_sCalibrationID = "";
             m_bHasCompressionData = false;
             m_bHasCalibrationData = false;
-            for (int nInd=0; nInd<m_arrAmplitudeCalibrationDataDB.Length; nInd++)
+            for (int nInd = 0; nInd < m_arrAmplitudeCalibrationDataDB.Length; nInd++)
             {
                 m_arrAmplitudeCalibrationDataDB[nInd] = INVALID_DATA;
                 m_arrCompressionDataDBM[nInd] = INVALID_DATA;
@@ -201,7 +202,7 @@ namespace RFExplorerCommunicator
             {
                 m_arrCompressionDataDBM[MIN_ENTRY_DATA] = DEFAULT_COMPRESSION;
             }
-            if (m_arrCompressionDataDBM[MAX_ENTRY_DATA-1] == INVALID_DATA)
+            if (m_arrCompressionDataDBM[MAX_ENTRY_DATA - 1] == INVALID_DATA)
             {
                 m_arrCompressionDataDBM[MAX_ENTRY_DATA - 1] = DEFAULT_COMPRESSION;
             }
@@ -218,7 +219,7 @@ namespace RFExplorerCommunicator
             //float fLastCompression=0.0f;
             for (int nInd = 0; nInd < m_arrAmplitudeCalibrationDataDB.Length; nInd++)
             {
-                float fVal=m_arrAmplitudeCalibrationDataDB[nInd];
+                float fVal = m_arrAmplitudeCalibrationDataDB[nInd];
                 if (fVal == INVALID_DATA)
                 {
                     m_arrAmplitudeCalibrationDataDB[nInd] = fLastAmplitude;
@@ -273,15 +274,21 @@ namespace RFExplorerCommunicator
 
                     if (sLine.Substring(0, 2) != "--")
                     {
+                        if (sLine.Contains(","))
+                        {
+                            //From octuber 2017, we want files with "en-US" as regional settings
+                            return false;
+                        }
                         string[] arrStrings = sLine.Split(' ');
                         if (arrStrings.Length >= 2)
                         {
                             int nMHZ = Convert.ToInt16(arrStrings[0]);
-                            m_arrAmplitudeCalibrationDataDB[nMHZ] = (float)Convert.ToDouble(arrStrings[1]);
+                            //From october 2017 we always save data with "en-US" settings
+                            m_arrAmplitudeCalibrationDataDB[nMHZ] = (float)Double.Parse(arrStrings[1], CultureInfo.InvariantCulture);
                             if (arrStrings.Length >= 3)
                             {
                                 //this is a file that includes compression data
-                                m_arrCompressionDataDBM[nMHZ] = (float)Convert.ToDouble(arrStrings[2]);
+                                m_arrCompressionDataDBM[nMHZ] = (float)Double.Parse(arrStrings[2], CultureInfo.InvariantCulture);
                                 m_bHasCompressionData = true;
                             }
                         }
@@ -297,7 +304,7 @@ namespace RFExplorerCommunicator
                     string[] sFile = sFilename.Split('\\');
                     if (sFile.Length > 0)
                     {
-                        m_sCalibrationID = sFile[sFile.Length - 1].ToUpper().Replace(".RFA","");
+                        m_sCalibrationID = sFile[sFile.Length - 1].ToUpper().Replace(".RFA", "");
                     }
 
                     //fill in all gaps

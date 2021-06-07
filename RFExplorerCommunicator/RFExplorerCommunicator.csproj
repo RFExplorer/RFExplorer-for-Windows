@@ -45,39 +45,21 @@
     <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
     <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
     <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>..\RFExplorerClient\RFEAnalysisRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
     <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <DocumentationFile>bin\x86\Release\RFExplorerCommunicator.XML</DocumentationFile>
+    <NoWarn>CS1570,CS1591,CS1573,CS1572,CS1587,MSB3884</NoWarn>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Full_Release_SeeedStudio|x86'">
-    <OutputPath>bin\x86\Full_Release_SeeedStudio\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ReleaseUnixLike|x86'">
+    <OutputPath>bin\x86\ReleaseUnixLike\</OutputPath>
+    <DefineConstants>TRACE;UNIX_LIKE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>..\RFExplorerClient\RFEAnalysisRules.ruleset</CodeAnalysisRuleSet>
-    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release_Full|x86'">
-    <OutputPath>bin\x86\Release_Full\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>..\RFExplorerClient\RFEAnalysisRules.ruleset</CodeAnalysisRuleSet>
-    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug_SeeedStudio|x86'">
-    <OutputPath>bin\x86\Debug_SeeedStudio\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>..\RFExplorerClient\RFEAnalysisRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
   </PropertyGroup>
   <ItemGroup>
@@ -102,6 +84,7 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="RFE6GENCalibrationData.cs" />
     <Compile Include="RFEAmplitudeTableDataCollection.cs" />
+    <Compile Include="RFEBinaryPacketDataCollection.cs" />
     <Compile Include="RFEConfiguration.cs" />
     <Compile Include="RFEScreenDataCollection.cs" />
     <Compile Include="RFECommunicator.cs" />
@@ -114,6 +97,7 @@
     <Compile Include="ToolGroupCOMPort.Designer.cs">
       <DependentUpon>ToolGroupCOMPort.cs</DependentUpon>
     </Compile>
+    <Compile Include="VisualObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Main.ico" />

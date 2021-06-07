@@ -679,7 +679,7 @@ namespace RFExplorerClient
 
             RFESweepData objSweep = m_objRFEAnalyzer.TrackingData.GetData(nLastSample);
             RFESweepData objSweepAvg = m_objRFEAnalyzer.TrackingData.GetMedianAverage(nLastSample + 1 - nAvailableAverageSamples, nLastSample);
-            objSweep.StepFrequencyMHZ = m_objRFEGenerator.RFGenTrackStepMHZ(); //step tracking frequency is not known by analyzer
+            objSweep.StepFrequencyMHZ = m_objRFEGenerator.RFGenStepMHZ(); //step tracking frequency is not known by analyzer
 
             double dMinDB = 100;
             double dMaxDB = -120;

@@ -1,6 +1,6 @@
 ﻿//============================================================================
 //RF Explorer for Windows - A Handheld Spectrum Analyzer for everyone!
-//Copyright © 2010-21 RF Explorer Technologies SL, www.rf-explorer.com
+//Copyright (C) 2010-20 RF Explorer Technologies SL, www.rf-explorer.com
 //
 //This application is free software; you can redistribute it and/or
 //modify it under the terms of the GNU Lesser General Public
@@ -62,8 +62,8 @@ namespace RFExplorerCommunicator
 
         //pre-defined const values for different power level configurations organized as {L2,L1,L0,H3,H2,H1,H0}
         readonly double[,] m_arrDeltaAmplitude = {
-               {-3.23,	-6.24,	 -9.29,	  29.72,   26.71,	23.62,	 20.68},
-               {-3.22,	-6.25,	 -9.25,	  29.76,   26.85,	23.81,	 20.77},
+               {-3.23,  -6.24,   -9.29,   29.72,   26.71,   23.62,   20.68},
+               {-3.22,  -6.25,   -9.25,   29.76,   26.85,   23.81,   20.77},
                {-3.23,  -6.25,   -9.26 ,  29.89,   26.73,   23.79,   20.78},
                {-3.24,  -6.29,   -10.71,  29.87,   26.82,   23.7 ,   20.82},
                {-3.23,  -6.28,   -9.2  ,  30.01,   26.9 ,   23.87,   20.78},
@@ -219,13 +219,12 @@ namespace RFExplorerCommunicator
                {-0.58,  -4.06,   -8.32 ,  17.6 ,   18.23,   15.58,   11.9 },
                {-0.91,  -4.32,   -8.46 ,  17.26,   17.51,   14.82,   11.07},
                {-0.88,  -4.14,   -8.15 ,  17.49,   17.66,   14.81,   11.24},
-               {-0.74,  -4.13,   -8.29 ,  17.98,   18.09,   15.38,   11.64},  
+               {-0.74,  -4.13,   -8.29 ,  17.98,   18.09,   15.38,   11.64},
                {-0.82,  -4.4 ,   -8.47 ,  18.34,   18.53,   15.8 ,   12.05},
                {-0.97,  -4.53,   -8.87 ,  18.16,   18.39,   15.6 ,   11.86},
                {-0.92,  -4.8 ,   -9.19 ,  17.82,   17.97,   14.92,   11.35}
             };
 
-        /*
         int[,] arrFirmware =
         {
            {-6 ,-12,-19,59, 53, 47, 41},
@@ -389,10 +388,10 @@ namespace RFExplorerCommunicator
            {-2 ,-9 ,-17,37, 37, 32, 24},
            {-2 ,-9 ,-18,36, 37, 31, 24},
            {-2 ,-10,-18,36, 36, 30, 23}
-        };*/
+        };
 
         //actual -30dBm adjusted values read from signal generator
-        double[] m_arrSignalGeneratorEmbeddedCalibrationActual30DBM = null;
+        double[] m_arrSignalGeneratorEmbeddedCalibrationActual30DBM = null; //-30dBm
 
         public int GetCalSize()
         {
@@ -427,7 +426,11 @@ namespace RFExplorerCommunicator
 
             for (int nInd = 0; nInd < nSize; nInd++)
             {
-                m_arrSignalGeneratorEmbeddedCalibrationActual30DBM[nInd] = -30.0 + Convert.ToInt16(sLine[nInd + 3]) / 10.0;
+                int nVal = Convert.ToInt16(sLine[nInd + 3]);
+                if (nVal > 127)
+                    nVal = -(256 - nVal); //get the right sign
+
+                m_arrSignalGeneratorEmbeddedCalibrationActual30DBM[nInd] = -30.0 + (nVal / 10.0);
                 if (!String.IsNullOrEmpty(sLine))
                 {
                     if ((nInd % 16) == 0)
@@ -527,5 +530,6 @@ namespace RFExplorerCommunicator
 
             return dValueDBM;
         }
+
     }
 }

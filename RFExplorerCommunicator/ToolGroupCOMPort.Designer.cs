@@ -49,7 +49,7 @@
             // m_btnRescan
             // 
             this.m_btnRescan.AutoSize = true;
-            this.m_btnRescan.Location = new System.Drawing.Point(91, 19);
+            this.m_btnRescan.Location = new System.Drawing.Point(93, 23);
             this.m_btnRescan.MaximumSize = new System.Drawing.Size(23, 21);
             this.m_btnRescan.Name = "m_btnRescan";
             this.m_btnRescan.Size = new System.Drawing.Size(23, 21);
@@ -121,21 +121,21 @@
             this.m_groupControl_Connection.Margin = new System.Windows.Forms.Padding(0);
             this.m_groupControl_Connection.Name = "m_groupControl_Connection";
             this.m_groupControl_Connection.Padding = new System.Windows.Forms.Padding(0);
-            this.m_groupControl_Connection.Size = new System.Drawing.Size(195, 116);
+            this.m_groupControl_Connection.Size = new System.Drawing.Size(195, 133);
             this.m_groupControl_Connection.TabIndex = 51;
             this.m_groupControl_Connection.TabStop = false;
             this.m_groupControl_Connection.Text = "COM Port";
             // 
             // ToolGroupCOMPort
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoSize = true;
             this.Controls.Add(this.m_groupControl_Connection);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.MinimumSize = new System.Drawing.Size(195, 116);
             this.Name = "ToolGroupCOMPort";
-            this.Size = new System.Drawing.Size(195, 116);
+            this.Size = new System.Drawing.Size(195, 133);
             this.Load += new System.EventHandler(this.ToolGroupCOMPort_Load);
             this.m_groupControl_Connection.ResumeLayout(false);
             this.m_groupControl_Connection.PerformLayout();

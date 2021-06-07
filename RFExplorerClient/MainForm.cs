@@ -2524,7 +2524,7 @@ namespace RFExplorerClient
                     m_arrWiFiBarText[nSweepPointInd].Text = "";
 
                 double dFreqStepMHZ = m_objRFEAnalyzer.StartFrequencyMHZ + m_objRFEAnalyzer.StepFrequencyMHZ * nSweepPointInd;
-                double dRealtimeDBM = objSweep.GetAmplitudeDBM(nSweepPointInd, m_objRFEAnalyzer.m_AmplitudeCalibration, menuUseAmplitudeCorrection.Checked);
+                double dRealtimeDBM = objSweep.GetAmplitudeDBM(nSweepPointInd);
                 double dMaxDBM = dRealtimeDBM;
                 double dMinDBM = dRealtimeDBM;
                 double dAverageDBM = dRealtimeDBM;
@@ -2535,7 +2535,7 @@ namespace RFExplorerClient
                     RFESweepData objSweepIter = m_objRFEAnalyzer.SweepData.GetData(nSweepIterator);
                     if (objSweepIter != null)
                     {
-                        double dLocalAvgDBM = objSweepIter.GetAmplitudeDBM(nSweepPointInd, m_objRFEAnalyzer.m_AmplitudeCalibration, menuUseAmplitudeCorrection.Checked);
+                        double dLocalAvgDBM = objSweepIter.GetAmplitudeDBM(nSweepPointInd);
                         dAverageDBM += dLocalAvgDBM;
                         if (dMinDBM > dLocalAvgDBM)
                         {
@@ -2575,7 +2575,7 @@ namespace RFExplorerClient
                 }
                 if (menuMaxHoldTrace.Checked && (m_objRFEAnalyzer.SweepData.MaxHoldData != null) && m_objRFEAnalyzer.Mode != RFECommunicator.eMode.MODE_WIFI_ANALYZER)
                 {
-                    m_PointList_MaxHold.Add(dFreqStepMHZ, ConvertToCurrentAmplitudeUnit(m_objRFEAnalyzer.SweepData.MaxHoldData.GetAmplitudeDBM(nSweepPointInd, m_objRFEAnalyzer.m_AmplitudeCalibration, menuUseAmplitudeCorrection.Checked)), RFECommunicator.MIN_AMPLITUDE_DBM);
+                    m_PointList_MaxHold.Add(dFreqStepMHZ, ConvertToCurrentAmplitudeUnit(m_objRFEAnalyzer.SweepData.MaxHoldData.GetAmplitudeDBM(nSweepPointInd)), RFECommunicator.MIN_AMPLITUDE_DBM);
                 }
                 if ((menuAveragedTrace.Checked && m_objRFEAnalyzer.Mode != RFECommunicator.eMode.MODE_WIFI_ANALYZER) || m_bCalibrating)
                 {
@@ -2988,7 +2988,6 @@ namespace RFExplorerClient
                 m_GraphSpectrumAnalyzer.Invalidate();
             }
             WaterfallClean();
-            m_objRFEAnalyzer.ResetInternalBuffers();
             m_ToolGroup_AnalyzerDataFeed.SweepIndex = 0;
         }
 
@@ -3364,10 +3363,7 @@ namespace RFExplorerClient
                     sFilename = m_sDefaultUserFolder + "\\" + sFilename;
                     sFilename = sFilename.Replace("\\\\", "\\");
                 }
-                if (menuUseAmplitudeCorrection.Checked)
-                    m_objRFEAnalyzer.SweepData.SaveFileCSV(sFilename, GetCSVDelimiter(), m_objRFEAnalyzer.m_AmplitudeCalibration);
-                else
-                    m_objRFEAnalyzer.SweepData.SaveFileCSV(sFilename, GetCSVDelimiter(), null);
+                m_objRFEAnalyzer.SweepData.SaveFileCSV(sFilename, GetCSVDelimiter(), null);
 
             }
             catch (Exception obEx) { MessageBox.Show(obEx.Message); }
@@ -5037,7 +5033,6 @@ namespace RFExplorerClient
 
         private void menuRefreshRemoteMaxHold_Click(object sender, EventArgs e)
         {
-            m_objRFEAnalyzer.ResetInternalBuffers();
         }
 
         private void OnOnlineHelp_Click(object sender, EventArgs e)
@@ -5119,8 +5114,8 @@ namespace RFExplorerClient
 
         private void DumpAllReceivedBytes()
         {
-            string sString = m_objRFEAnalyzer.AllReceivedBytes;
-            m_objRFEAnalyzer.AllReceivedBytes = "";
+            string sString = m_objRFEAnalyzer.DebugAllReceivedBytes;
+            m_objRFEAnalyzer.CleanReceivedBytes();
             if (String.IsNullOrEmpty(sString))
                 return;
 
@@ -5515,19 +5510,7 @@ namespace RFExplorerClient
                 objPanelConfiguration.Controls[_Cal].Text = "Cal: ";
                 if (menuUseAmplitudeCorrection.Checked)
                 {
-                    if (m_objRFEAnalyzer.m_AmplitudeCalibration.HasCalibrationData)
-                    {
-                        objPanelConfiguration.Controls[_Cal].Text += "OVR ";
-                        objPanelConfiguration.Controls[_Cal].Text += m_objRFEAnalyzer.m_AmplitudeCalibration.CalibrationID.ToLower();
-                        if (objPanelConfiguration.Controls[_Cal].Text.Length > 20)
-                        {
-                            objPanelConfiguration.Controls[_Cal].Text = objPanelConfiguration.Controls[_Cal].Text.Substring(0, 20);
-                        }
-                    }
-                    else
-                    {
-                        objPanelConfiguration.Controls[_Cal].Text += "No";
-                    }
+                    objPanelConfiguration.Controls[_Cal].Text += "No";
                 }
                 else
                 {
@@ -5996,11 +5979,6 @@ namespace RFExplorerClient
             if (m_objRFEAnalyzer.LoadFileRFA(sFilename))
             {
                 m_LimitLineAnalyzer_Overload.Clear();
-                if (m_objRFEAnalyzer.m_AmplitudeCalibration.HasCompressionData)
-                {
-                    m_LimitLineAnalyzer_Overload.CreateFromArray(m_objRFEAnalyzer.m_AmplitudeCalibration.m_arrCompressionDataDBM);
-                    m_LimitLineAnalyzer_Overload.NewOffset(m_objRFEAnalyzer.AmplitudeOffsetDB);
-                }
                 m_LimitLineAnalyzer_Overload.AmplitudeUnits = GetCurrentAmplitudeEnum();
                 menuUseAmplitudeCorrection.Enabled = true;
                 menuUseAmplitudeCorrection.Checked = m_objRFEAnalyzer.PortConnected;

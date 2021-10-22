@@ -1371,6 +1371,7 @@ namespace RFExplorerCommunicator
 
                                 switch (strReceived[2])
                                 {
+                                    case 'd':
                                     case 'c':
                                         {
                                             //Calibration data
